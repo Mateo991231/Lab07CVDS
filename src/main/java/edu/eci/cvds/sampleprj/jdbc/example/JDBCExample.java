@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author hcadavid
+ * @author Mateo Quintero - Brayan Jimenez
  */
 public class JDBCExample {
     
@@ -58,7 +58,7 @@ public class JDBCExample {
             System.out.println("-----------------------");
             
             
-            int suCodigoECI=20134423;
+            int suCodigoECI=2152552;
             registrarNuevoProducto(con, suCodigoECI, "SU NOMBRE", 99999999);            
             con.commit();
                         
@@ -117,7 +117,7 @@ public class JDBCExample {
      */
     public static int valorTotalPedido(Connection con, int codigoPedido) throws SQLException {
         PreparedStatement conConsult = null;
-        String selectCost = "SELECT SUM(precio*cantidad) as np FROM ORD_PRODUCTOS, ORD_DETALLE_PEDIDO, ORD_PEDIDOS WHERE ORD_PEDIDOS.codigo=ORD_DETALLES_PEDIDO.pedido_fk AND ORD_PRODUCTOS.codigo=producto_fk AND ORD_PEDIDOS.codigo="+codigoPedido;
+        String selectCost = "SELECT SUM(precio*cantidad) as np FROM ORD_PRODUCTOS, ORD_DETALLE_PEDIDO, ORD_PEDIDOS WHERE ORD_PEDIDOS.codigo=pedido_fk AND ORD_PRODUCTOS.codigo=producto_fk AND ORD_PEDIDOS.codigo="+codigoPedido;
         conConsult = (PreparedStatement) con.prepareStatement(selectCost);
         ResultSet total = conConsult.executeQuery();
         int result = 0;
@@ -127,5 +127,6 @@ public class JDBCExample {
         con.commit();
         return result;
     }
+
 
 }
